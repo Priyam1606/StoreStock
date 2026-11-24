@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 780" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .header-bg { fill: #ffffff; stroke: #e2e8f0; stroke-width: 1; }
+      .card-bg { fill: #ffffff; stroke: #e2e8f0; stroke-width: 1; rx: 8; }
+      .text-primary { fill: #1e3a8a; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: 700; }
+      .text-title { fill: #0f172a; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-weight: 600; }
+      .text-body { fill: #334155; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; }
+      .text-muted { fill: #64748b; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; }
+      .tab-active { fill: #2563eb; font-weight: 600; }
+      .tab-inactive { fill: #64748b; font-weight: 500; }
+      .badge-owner { fill: #ede9fe; rx: 12; }
+      .badge-owner-text { fill: #6d28d9; font-weight: 700; font-size: 12px; }
+      .badge-low { fill: #fef3c7; rx: 4; }
+      .badge-low-text { fill: #92400e; font-weight: 600; font-size: 11px; }
+      .badge-ok { fill: #dcfce7; rx: 4; }
+      .badge-ok-text { fill: #166534; font-weight: 600; font-size: 11px; }
+      .row-low { fill: #fffbeb; }
+      .border-line { stroke: #e2e8f0; stroke-width: 1; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="780" class="bg"/>
+
+  <!-- Top Header -->
+  <rect x="0" y="0" width="1200" height="64" class="header-bg"/>
+  <text x="40" y="39" class="text-primary" font-size="22">StoreStock</text>
+  <rect x="170" y="20" width="76" height="24" class="badge-owner"/>
+  <text x="187" y="36" class="badge-owner-text">OWNER</text>
+
+  <text x="1000" y="37" class="text-title" font-size="14">admin (owner)</text>
+  <rect x="1100" y="18" width="68" height="28" rx="6" fill="#f1f5f9" stroke="#cbd5e1"/>
+  <text x="1114" y="36" class="text-body" font-size="12">Sign Out</text>
+
+  <!-- Main Container -->
+  <!-- Navigation Tabs -->
+  <line x1="40" y1="120" x2="1160" y2="120" class="border-line"/>
+  <text x="40" y="110" class="tab-active" font-size="15">Products &amp; Stock</text>
+  <line x1="40" y1="119" x2="175" y2="119" stroke="#2563eb" stroke-width="3"/>
+
+  <text x="210" y="110" class="tab-inactive" font-size="15">New Sale</text>
+  <text x="310" y="110" class="tab-inactive" font-size="15">Customers &amp; Udhaar</text>
+  <text x="480" y="110" class="tab-inactive" font-size="15">Reports</text>
+
+  <!-- Products Card -->
+  <rect x="40" y="140" width="1120" height="600" class="card-bg"/>
+
+  <!-- Search Bar -->
+  <rect x="64" y="165" width="300" height="38" rx="6" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="78" y="189" class="text-muted">Search SKU or name...</text>
+  <rect x="375" y="165" width="85" height="38" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="395" y="189" class="text-title" font-size="14">Search</text>
+  <rect x="470" y="165" width="85" height="38" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="487" y="189" class="text-title" font-size="14">Refresh</text>
+
+  <!-- Table Header -->
+  <rect x="64" y="225" width="1072" height="40" fill="#f8fafc"/>
+  <line x1="64" y1="265" x2="1136" y2="265" class="border-line"/>
+  <text x="80" y="250" class="text-muted" font-weight="600">SKU</text>
+  <text x="250" y="250" class="text-muted" font-weight="600">NAME</text>
+  <text x="560" y="250" class="text-muted" font-weight="600">UNIT</text>
+  <text x="660" y="250" class="text-muted" font-weight="600">PRICE</text>
+  <text x="790" y="250" class="text-muted" font-weight="600">STOCK</text>
+  <text x="910" y="250" class="text-muted" font-weight="600">REORDER</text>
+  <text x="1030" y="250" class="text-muted" font-weight="600">STATUS</text>
+
+  <!-- Row 1: Low stock item -->
+  <rect x="64" y="266" width="1072" height="52" class="row-low"/>
+  <line x1="64" y1="318" x2="1136" y2="318" class="border-line"/>
+  <text x="80" y="297" class="text-title" font-size="14">SALT-TATA-1KG</text>
+  <text x="250" y="297" class="text-body">Tata Salt 1kg</text>
+  <text x="560" y="297" class="text-body">pkt</text>
+  <text x="660" y="297" class="text-body" font-weight="600">₹28.00</text>
+  <text x="790" y="297" class="text-title" font-size="14" fill="#92400e">5</text>
+  <text x="910" y="297" class="text-body">20</text>
+  <rect x="1030" y="282" width="76" height="22" class="badge-low"/>
+  <text x="1042" y="297" class="badge-low-text">Low Stock</text>
+
+  <!-- Row 2: In stock item -->
+  <line x1="64" y1="370" x2="1136" y2="370" class="border-line"/>
+  <text x="80" y="349" class="text-title" font-size="14">ATTA-AASH-5KG</text>
+  <text x="250" y="349" class="text-body">Aashirvaad Shudh Chakki Atta 5kg</text>
+  <text x="560" y="349" class="text-body">bag</text>
+  <text x="660" y="349" class="text-body" font-weight="600">₹245.00</text>
+  <text x="790" y="349" class="text-title" font-size="14">40</text>
+  <text x="910" y="349" class="text-body">15</text>
+  <rect x="1030" y="334" width="68" height="22" class="badge-ok"/>
+  <text x="1044" y="349" class="badge-ok-text">In Stock</text>
+
+  <!-- Row 3: In stock item -->
+  <line x1="64" y1="422" x2="1136" y2="422" class="border-line"/>
+  <text x="80" y="401" class="text-title" font-size="14">OIL-FORT-1L</text>
+  <text x="250" y="401" class="text-body">Fortune Sunlite Sunflower Oil 1L</text>
+  <text x="560" y="401" class="text-body">pouch</text>
+  <text x="660" y="401" class="text-body" font-weight="600">₹135.00</text>
+  <text x="790" y="401" class="text-title" font-size="14">60</text>
+  <text x="910" y="401" class="text-body">25</text>
+  <rect x="1030" y="386" width="68" height="22" class="badge-ok"/>
+  <text x="1044" y="401" class="badge-ok-text">In Stock</text>
+
+  <!-- Row 4: Low stock item -->
+  <rect x="64" y="423" width="1072" height="52" class="row-low"/>
+  <line x1="64" y1="474" x2="1136" y2="474" class="border-line"/>
+  <text x="80" y="453" class="text-title" font-size="14">BUTT-AMUL-500G</text>
+  <text x="250" y="453" class="text-body">Amul Butter 500g</text>
+  <text x="560" y="453" class="text-body">pack</text>
+  <text x="660" y="453" class="text-body" font-weight="600">₹275.00</text>
+  <text x="790" y="453" class="text-title" font-size="14" fill="#92400e">3</text>
+  <text x="910" y="453" class="text-body">10</text>
+  <rect x="1030" y="438" width="76" height="22" class="badge-low"/>
+  <text x="1042" y="453" class="badge-low-text">Low Stock</text>
+
+  <!-- Row 5: Low stock item -->
+  <rect x="64" y="475" width="1072" height="52" class="row-low"/>
+  <line x1="64" y1="526" x2="1136" y2="526" class="border-line"/>
+  <text x="80" y="505" class="text-title" font-size="14">MAGG-NOOD-70G</text>
+  <text x="250" y="505" class="text-body">Maggi 2-Minute Masala Noodles 70g</text>
+  <text x="560" y="505" class="text-body">pkt</text>
+  <text x="660" y="505" class="text-body" font-weight="600">₹14.00</text>
+  <text x="790" y="505" class="text-title" font-size="14" fill="#92400e">12</text>
+  <text x="910" y="505" class="text-body">50</text>
+  <rect x="1030" y="490" width="76" height="22" class="badge-low"/>
+  <text x="1042" y="505" class="badge-low-text">Low Stock</text>
+
+  <!-- Row 6: In stock item -->
+  <line x1="64" y1="578" x2="1136" y2="578" class="border-line"/>
+  <text x="80" y="557" class="text-title" font-size="14">BISC-PARL-250G</text>
+  <text x="250" y="557" class="text-body">Parle-G Glucose Biscuits 250g</text>
+  <text x="560" y="557" class="text-body">pkt</text>
+  <text x="660" y="557" class="text-body" font-weight="600">₹25.00</text>
+  <text x="790" y="557" class="text-title" font-size="14">80</text>
+  <text x="910" y="557" class="text-body">40</text>
+  <rect x="1030" y="542" width="68" height="22" class="badge-ok"/>
+  <text x="1044" y="557" class="badge-ok-text">In Stock</text>
+</svg>

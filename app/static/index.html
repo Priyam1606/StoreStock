@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StoreStock - Store Management</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+  <!-- Login View -->
+  <div id="login-view" class="auth-wrapper">
+    <div class="auth-card">
+      <div style="text-align: center; margin-bottom: 24px;">
+        <h1 style="color: var(--primary); font-size: 24px; font-weight: 700;">StoreStock</h1>
+        <p style="color: var(--text-muted); font-size: 13px;">Single-store inventory & udhaar counter</p>
+      </div>
+
+      <div id="login-alert" class="alert alert-danger hidden"></div>
+
+      <form id="login-form">
+        <div class="form-group">
+          <label for="login-username">Username</label>
+          <input type="text" id="login-username" class="form-control" required autofocus autocomplete="username">
+        </div>
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" class="form-control" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 8px;">Sign In</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Dashboard View -->
+  <div id="dashboard-view" class="hidden">
+    <header>
+      <div class="brand">
+        <h1>StoreStock</h1>
+        <span id="role-pill" class="role-pill"></span>
+      </div>
+      <div class="user-badge">
+        <span id="username-display" style="font-weight: 600; font-size: 14px;"></span>
+        <button id="logout-btn" class="btn btn-secondary btn-sm">Sign Out</button>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="nav-tabs">
+        <button class="nav-tab active" data-tab="tab-products">Products & Stock</button>
+        <button class="nav-tab" data-tab="tab-sale">New Sale</button>
+        <button class="nav-tab" data-tab="tab-customers">Customers & Udhaar</button>
+        <button id="nav-reports-tab" class="nav-tab hidden" data-tab="tab-reports">Reports</button>
+      </div>
+
+      <!-- Tab: Products -->
+      <div id="tab-products" class="tab-content">
+        <div class="card">
+          <div style="display: flex; gap: 12px; margin-bottom: 16px;">
+            <input type="text" id="prod-search" class="form-control" placeholder="Search by SKU or name..." style="max-width: 350px;">
+            <button id="prod-search-btn" class="btn btn-secondary">Search</button>
+            <button id="prod-refresh-btn" class="btn btn-secondary">Refresh</button>
+          </div>
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>SKU</th>
+                  <th>Name</th>
+                  <th>Unit</th>
+                  <th>Price</th>
+                  <th>Stock</th>
+                  <th>Reorder Level</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="products-table-body">
+                <tr><td colspan="7" style="text-align: center;">Loading products...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: New Sale -->
+      <div id="tab-sale" class="tab-content hidden">
+        <div class="card" style="max-width: 800px; margin: 0 auto;">
+          <h2 style="font-size: 18px; margin-bottom: 16px; color: var(--primary);">Record New Sale</h2>
+          
+          <div id="sale-alert" class="alert hidden"></div>
+
+          <form id="sale-form">
+            <div class="grid-2">
+              <div class="form-group">
+                <label for="sale-payment-type">Payment Type</label>
+                <select id="sale-payment-type" class="form-control">
+                  <option value="cash">Cash</option>
+                  <option value="credit">Credit (Udhaar)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="sale-customer">Customer (Required for Credit)</label>
+                <select id="sale-customer" class="form-control">
+                  <option value="">-- Walk-in Customer (None) --</option>
+                </select>
+              </div>
+            </div>
+
+            <div style="margin: 20px 0;">
+              <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px;">Sale Items</label>
+              <div id="sale-lines-container"></div>
+              <button type="button" id="add-line-btn" class="btn btn-secondary btn-sm" style="margin-top: 8px;">+ Add Product Line</button>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 16px; margin-top: 20px;">
+              <div>
+                <span style="font-size: 14px; color: var(--text-muted);">Total Amount:</span>
+                <span id="sale-total-display" style="font-size: 24px; font-weight: 700; color: var(--primary); margin-left: 8px;">₹0.00</span>
+              </div>
+              <button type="submit" class="btn btn-primary" style="padding: 10px 24px; font-size: 16px;">Complete Sale</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Tab: Customers & Udhaar -->
+      <div id="tab-customers" class="tab-content hidden">
+        <div class="grid-2" style="grid-template-columns: 2fr 1fr; align-items: start;">
+          <div class="card">
+            <h2 style="font-size: 18px; margin-bottom: 16px; color: var(--primary);">Customer Accounts</h2>
+            <div class="table-responsive">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Credit Limit</th>
+                    <th>Balance (Udhaar)</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="customers-table-body">
+                  <tr><td colspan="5" style="text-align: center;">Loading customers...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2 style="font-size: 16px; margin-bottom: 16px; color: var(--primary);">Record Payment</h2>
+            <div id="payment-alert" class="alert hidden"></div>
+            <form id="payment-form">
+              <div class="form-group">
+                <label for="pay-customer">Customer</label>
+                <select id="pay-customer" class="form-control" required></select>
+              </div>
+              <div class="form-group">
+                <label for="pay-amount">Amount (₹)</label>
+                <input type="number" step="0.01" min="0.01" id="pay-amount" class="form-control" placeholder="0.00" required>
+              </div>
+              <div class="form-group">
+                <label for="pay-note">Note / Receipt Ref</label>
+                <input type="text" id="pay-note" class="form-control" placeholder="e.g. Counter cash repayment">
+              </div>
+              <button type="submit" class="btn btn-primary" style="width: 100%;">Record Repayment</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Ledger View Modal / Card -->
+        <div id="ledger-card" class="card hidden" style="margin-top: 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <h2 id="ledger-title" style="font-size: 18px; color: var(--primary);">Customer Ledger</h2>
+            <button id="close-ledger-btn" class="btn btn-secondary btn-sm">Close</button>
+          </div>
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date & Time</th>
+                  <th>Transaction Kind</th>
+                  <th>Amount</th>
+                  <th>Note</th>
+                </tr>
+              </thead>
+              <tbody id="ledger-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: Reports (Owner Only) -->
+      <div id="tab-reports" class="tab-content hidden">
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <h2 style="font-size: 18px; color: var(--primary);">Daily Financial Summary</h2>
+            <div style="display: flex; gap: 8px;">
+              <input type="date" id="report-date" class="form-control" style="width: auto;">
+              <button id="fetch-report-btn" class="btn btn-primary btn-sm">Update Date</button>
+            </div>
+          </div>
+
+          <div class="grid-4" id="daily-summary-stats">
+            <div class="stat-box">
+              <div class="stat-label">Total Sales</div>
+              <div id="stat-total-sales" class="stat-value">₹0.00</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Cash Sales</div>
+              <div id="stat-cash-sales" class="stat-value">₹0.00</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Credit Sales</div>
+              <div id="stat-credit-sales" class="stat-value">₹0.00</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Returns / Refunds</div>
+              <div id="stat-returns" class="stat-value" style="color: var(--danger);">₹0.00</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Net Sales</div>
+              <div id="stat-net-sales" class="stat-value">₹0.00</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Cost of Goods Sold (COGS)</div>
+              <div id="stat-cogs" class="stat-value">₹0.00</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Gross Profit</div>
+              <div id="stat-gross-profit" class="stat-value" style="color: var(--success);">₹0.00</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Transactions Count</div>
+              <div id="stat-tx-count" class="stat-value">0</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <!-- Top Selling -->
+          <div class="card">
+            <h2 style="font-size: 16px; margin-bottom: 12px; color: var(--primary);">Top Selling Products</h2>
+            <div class="table-responsive">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Qty Sold</th>
+                    <th>Revenue</th>
+                  </tr>
+                </thead>
+                <tbody id="top-selling-table-body">
+                  <tr><td colspan="3" style="text-align: center;">Loading...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Inventory & Udhaar Overview -->
+          <div class="card">
+            <h2 style="font-size: 16px; margin-bottom: 12px; color: var(--primary);">Store Valuations & Udhaar Exposure</h2>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <div class="stat-box">
+                <div class="stat-label">Total Outstanding Customer Credit</div>
+                <div id="stat-credit-outstanding" class="stat-value" style="color: var(--warning);">₹0.00</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-label">Total Inventory Retail Value</div>
+                <div id="stat-inv-retail" class="stat-value">₹0.00</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-label">Total Inventory Wholesale Cost</div>
+                <div id="stat-inv-cost" class="stat-value">₹0.00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
